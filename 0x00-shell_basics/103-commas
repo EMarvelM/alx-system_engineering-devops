@@ -1,0 +1,1 @@
+ls -ap | awk '{printf "%s%s",sep,$0; sep=", "}'
