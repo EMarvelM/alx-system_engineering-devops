@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
-# comments here
+# This script is displaying "Best School" 10 times using the until command
+i=0
+until [ "$i" -gt 9 ]
+do
+	i=$((i + 1))
+	echo "Best School"
+done
