@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # Bash script that displays a list of currently running processes
-ps axf -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start=START,time,command
+# ps auxf -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start=START,time,command\
+ps auxf
