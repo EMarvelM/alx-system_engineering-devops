@@ -1,0 +1,24 @@
+What is a server? A server is a powerful computer that stores and manages various resources, providing services or data to other computers (clients) over a network.
+
+What is the role of the domain name? The domain name, like www.foobar.com, is a human-readable address that helps users access your website. It acts as a friendly alias for your server's IP address (8.8.8.8).
+
+What type of DNS record is www in www.foobar.com? www is a subdomain, and in www.foobar.com, it's represented by a CNAME (Canonical Name) DNS record pointing to the main domain.
+
+What is the role of the web server? The web server (Nginx) handles incoming HTTP requests, serving static content and forwarding dynamic requests to the application server. It manages the communication between the user's browser and the application.
+
+What is the role of the application server? The application server executes the code (your application files) and processes dynamic content. It receives requests from the web server, executes the necessary logic, and sends back the results.
+
+What is the role of the database? The database (MySQL) stores and retrieves data for your application. It's where you keep user information, content, and other relevant data in a structured manner.
+
+What is the server using to communicate with the user's computer requesting the website? The server communicates with the user's computer using the HTTP protocol. The web server receives HTTP requests, processes them, and sends back the appropriate HTTP responses containing the requested data.
+
+
+Issues with this Infrastructure:
+
+1. Single Point of Failure (SPOF): Since there's only one server, if it goes down, the entire website becomes inaccessible. Consider adding redundancy or load balancing to mitigate this risk.
+
+2. Downtime during Maintenance: Deploying new code often requires restarting the web server, causing downtime. Implement rolling deployments or a backup server to minimize this impact.
+
+3. Scaling Limitations: If traffic surges, a single server may struggle to handle the load. Explore horizontal scaling by adding more servers or using cloud services for elasticity.
+
+https://imgur.com/xAlpSea
