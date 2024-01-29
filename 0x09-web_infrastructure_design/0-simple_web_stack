@@ -1,3 +1,6 @@
+https://imgur.com/xAlpSea
+
+
 What is a server? A server is a powerful computer that stores and manages various resources, providing services or data to other computers (clients) over a network.
 
 What is the role of the domain name? The domain name, like www.foobar.com, is a human-readable address that helps users access your website. It acts as a friendly alias for your server's IP address (8.8.8.8).
@@ -21,4 +24,3 @@ Issues with this Infrastructure:
 
 3. Scaling Limitations: If traffic surges, a single server may struggle to handle the load. Explore horizontal scaling by adding more servers or using cloud services for elasticity.
 
-https://imgur.com/xAlpSea
