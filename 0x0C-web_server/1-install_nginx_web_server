@@ -2,4 +2,16 @@
 # Install nginx on your web-01 server
 # Nginx should be listening on port 80
 
+# update the local package and install nginx
+apt-get update -y
+apt-get install nginx -y
+
+# firewall allow access to nginx service
+ufw allow 'Nginx HTTP'
+
+ufw status #VERBOSE
+
+service nginx --full-restart
+
+echo "Hello World!" > /var/www/html/index.html
 
