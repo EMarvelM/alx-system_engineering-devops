@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Configure your Nginx server so that 
+# /redirect_me is redirecting to another page
+
+# update the local package and install nginx
+apt-get update -y
+apt-get install nginx -y
+
+# firewall allow access to nginx service
+ufw allow 'Nginx HTTP'
+
+ufw status #VERBOSE
+
+service nginx --full-restart
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /etc/nginx/error_pages/404.html
+
+newString="server_name marviel.com"
+sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
+
+# for location
+newLocat="location /redirect_me {\n\
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\
+\t}"
+
+err_page="error_page 404 /error_pages/404.html"
+
+sed -ie "/$newString/a\\\n\t$newLocat" /etc/nginx/sites-available/default
+sed -ie "/$newString/a\\\n\t$err_page" /etc/nginx/sites-available/default
+
+service nginx restart
+
