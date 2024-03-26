@@ -13,7 +13,7 @@ ufw status #VERBOSE
 
 service nginx --full-restart
 
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 newString="server_name marviel.com"
 sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
