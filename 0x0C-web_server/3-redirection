@@ -15,8 +15,8 @@ service nginx --full-restart
 
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
-newString="server_name marviel.com"
-sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
+newString="server_name _"
+#sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
 
 # for location
 newLocat="location /redirect_me {\n\
