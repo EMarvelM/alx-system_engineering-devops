@@ -29,5 +29,7 @@ err_page="error_page 404 /error_pages/404.html"
 sed -ie "/$newString/a\\\n\t$newLocat" /etc/nginx/sites-available/default
 sed -ie "/$newString/a\\\n\t$err_page" /etc/nginx/sites-available/default
 
+sed -i "s/try_files $uri $uri\/ =404;/try_files $uri $uri\/ \/404.html;/"
+
 service nginx restart
 
