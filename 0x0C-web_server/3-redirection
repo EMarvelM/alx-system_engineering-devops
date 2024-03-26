@@ -2,6 +2,19 @@
 # Configure your Nginx server so that 
 # /redirect_me is redirecting to another page
 
+# update the local package and install nginx
+apt-get update -y
+apt-get install nginx -y
+
+# firewall allow access to nginx service
+ufw allow 'Nginx HTTP'
+
+ufw status #VERBOSE
+
+service nginx --full-restart
+
+echo "Hello World!" > /var/www/html/index.html
+
 newString="server_name marviel.com"
 sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
 
