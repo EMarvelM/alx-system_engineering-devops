@@ -1,22 +1,39 @@
 #!/usr/bin/env bash
-#Configure your Nginx server to have a custom 404 page that contains the string Ceci n'est pas une page.
+# Configure your Nginx server so that 
+# /redirect_me is redirecting to another page
 
-STRING="Hello World!"
+# update the local package and install nginx
+apt-get update -y
+apt-get install nginx -y
 
-REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 https://youtu.be/dQw4w9WgXcQ;\n\t}\n"
-FILE="/etc/nginx/sites-available/default"
-
-ERRORFILE="/usr/share/nginx/html/404error.html"
-FOUR="Ceci n'est pas une page"
-ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}\n"
-
-apt-get -y update
-apt-get -y install nginx
+# firewall allow access to nginx service
 ufw allow 'Nginx HTTP'
-sudo echo "$STRING" > /var/www/html/index.nginx-debian.html
-sed -i "37i\ $REDIRECT" "$FILE"
 
-echo "$FOUR" > "$ERRORFILE"
-sed -i "37i\ $ERRORREDIRECT" "$FILE"
+ufw status #VERBOSE
+
+service nginx --full-restart
+
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+
+newString="server_name marviel.com"
+sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
+
+# for location
+newLocat="location /redirect_me {\n\
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\
+\t}"
+
+err_page="\terror_page 404 /404.html;\n\
+\tlocation = /404.html {\n\
+\t\troot /usr/share/nginx/html;\n\
+\t\tinternal;\n\
+}\n"
+
+sed -ie "/$newString/a\\\n\t$newLocat" /etc/nginx/sites-available/default
+sed -ie "/$newString/a\\\n\t$err_page" /etc/nginx/sites-available/default
+
+sed -ie "47\ $err_page" /etc/nginx/sites-available/default
 
 service nginx restart
+
