@@ -14,7 +14,6 @@ ufw status #VERBOSE
 service nginx --full-restart
 
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-echo "Ceci n'est pas une page" > /etc/nginx/error_pages/404.html
 
 newString="server_name marviel.com"
 sed -i "s/server_name _/$newString/" /etc/nginx/sites-available/default
@@ -24,12 +23,17 @@ newLocat="location /redirect_me {\n\
 	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\
 \t}"
 
-err_page="error_page 404 /error_pages/404.html"
-
 sed -ie "/$newString/a\\\n\t$newLocat" /etc/nginx/sites-available/default
-sed -ie "/$newString/a\\\n\t$err_page" /etc/nginx/sites-available/default
 
-sed -i "s/try_files $uri $uri\/ =404;/try_files $uri $uri\/ \/404.html;/"
+# Define the custom 404 page content
+custom_404="<html>\n<head><title>404 Not Found</title></head>\n<body>\n<h1>404 Not Found</h1>\n<p>Ceci n'est pas une page</p>\n</body>\n</html>"
 
+# Create the custom 404 page file
+echo -e "$custom_404" > /var/www/html/404.html
+
+# Use sed to replace the default Nginx configuration for error pages with the custom 404 page
+sed -i 's/^.*error_page 404.*$/\terror_page 404 \/404.html;/' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply the changes
 service nginx restart
 
