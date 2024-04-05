@@ -1,2 +1,13 @@
 #!/usr/bin/env bash
 # Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
+domain=$*
+
+for i in $domain
+do
+	echo $i
+	#call function to print each domain detail instead of the argvs
+done
+
+#get_ip () {
+	
+#}
