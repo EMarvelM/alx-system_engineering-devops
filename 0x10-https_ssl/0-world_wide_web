@@ -10,12 +10,12 @@ get_details () {
 	fi
 }
 
-domains=["www", "lb-01", "web-01", "web-02"]
+domains=("www" "lb-01" "web-01" "web-02")
 
 
-for i in $domains
+for i in ${domains[@]}
 do
 	#call function to print each domain detail instead of the argvs
-	get_details $i "www"
+	get_details "$i.$domain" $i
 done
 
