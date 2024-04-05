@@ -2,12 +2,17 @@
 # Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
 domain=$*
 
+get_ip () {
+	if [ -n $1 ]; then
+		_ip=$(dig +short $1)
+		echo "$_ip"
+	fi
+}
+
 for i in $domain
 do
 	echo $i
 	#call function to print each domain detail instead of the argvs
+	get_ip $i
 done
 
-#get_ip () {
-	
-#}
