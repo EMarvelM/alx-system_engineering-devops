@@ -2,17 +2,20 @@
 # Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
 domain=$*
 
-get_ip () {
+get_details () {
 	if [ -n $1 ]; then
 		_ip=$(dig +short $1)
-		echo "$_ip"
+		_record=$(dig $1 | awk '/IN/ {print $3; exit}')
+		echo "The subdomain $2 is a $_record record and points to $_ip"
 	fi
 }
 
-for i in $domain
+domains=["www", "lb-01", "web-01", "web-02"]
+
+
+for i in $domains
 do
-	echo $i
 	#call function to print each domain detail instead of the argvs
-	get_ip $i
+	get_details $i "www"
 done
 
