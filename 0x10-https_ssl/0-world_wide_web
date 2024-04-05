@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
-domain=$*
+domain=("$@")
 
 get_details () {
-	if [ -n $1 ]; then
+	if [ -n "$1" ]; then
 		_ip=$(dig +short $1)
 		_record=$(dig $1 | awk '/IN/ {print $3; exit}')
 		echo "The subdomain $2 is a $_record record and points to $_ip"
@@ -11,11 +11,22 @@ get_details () {
 }
 
 domains=("www" "lb-01" "web-01" "web-02")
+#debugging
+#echo ${#domain[*]}
+#echo ${domain[0]}
 
-
-for i in ${domains[@]}
-do
-	#call function to print each domain detail instead of the argvs
-	get_details "$i.$domain" $i
-done
-
+if [ ${#domain[@]} -lt 2 ]; then
+	for i in ${domains[@]}
+	do
+		#call function to print each domain detail instead of the argvs
+		get_details "$i.$domain" $i
+	done
+else
+	for (( j=1 ; j<${#domain[*]}; j++ ))
+	do
+		#debugging
+		#echo "${domain[$j]}.${domain[0]}" ${domain[$j]}
+		get_details "${domain[$j]}.${domain[0]}" ${domain[$j]}
+	done
+#	get_details "$2.$domain" $2
+fi
