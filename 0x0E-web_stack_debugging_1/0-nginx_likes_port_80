@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# comment here
+#apt update
+#apt install nginx
+#sed -i s/"listen 80"/"listen *:80"/ /etc/nginx/sites-available/default
+sed -i s/"listen 80"/"listen *:80"/ defaulte
+service nginx restart
