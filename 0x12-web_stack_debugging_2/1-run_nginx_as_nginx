@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# nginx must be running as nginx user
+#adduser nginx --disabled-password -gecos "nginx"
+#sed -i 2i\/"user\ nginx"/ /etc/nginx/nginx.conf
+sed -i 2i\\"user\ nginx;" nginx.conf
+chown -R nginx:nginx /var/log/nginx
+chown -R nginx:nginx /var/lib/nginx
+
