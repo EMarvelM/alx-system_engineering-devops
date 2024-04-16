@@ -4,5 +4,5 @@
 #sed -i 2i\/"user\ nginx"/ /etc/nginx/nginx.conf
 chown -R nginx:nginx /var/log/nginx
 chown -R nginx:nginx /var/lib/nginx
-sed -i 2i\\"user\ nginx;" nginx.conf
+sed -i 2i\\"user\ nginx;" /etc/nginx/nginx.conf
 service nginx restart
