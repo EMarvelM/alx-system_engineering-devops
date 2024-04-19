@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# nginx must be running as nginx user
-#adduser nginx --disabled-password -gecos "nginx"
-#sed -i 2i\/"user\ nginx"/ /etc/nginx/nginx.conf
-chown -R nginx:nginx /var/log/nginx
-chown -R nginx:nginx /var/lib/nginx
-sed -i 2i\\"user\ nginx;" /etc/nginx/nginx.conf
-service nginx restart
+#Fixes a web server to run nginx as the nginx user listening to port 8080
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
+sudo -u nginx service nginx start
