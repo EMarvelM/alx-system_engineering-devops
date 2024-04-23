@@ -25,7 +25,6 @@ if __name__ == "__main__":
             "task": i['title'],
             "completed": i['completed'],
             "username": r_username,
-            
         }
 
         task.append(_str)
@@ -33,7 +32,7 @@ if __name__ == "__main__":
 
     with open(f"{num}.json", "w") as file:
         json.dump(_task, file)
-    #with open(f"{num}.csv", 'w', newline='') as file:
-     #   data = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
-      #  data.writerows(task)
+    # with open(f"{num}.csv", 'w', newline='') as file:
+    #   data = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
+    #   data.writerows(task)
     # print(_task)
