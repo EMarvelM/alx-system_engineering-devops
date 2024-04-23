@@ -2,9 +2,9 @@
 """using this REST API, for a given employee ID, returns
    information about his/her TODO list progress.
 """
-import requests
 from sys import argv
 import csv
+import requests
 
 if __name__ == "__main__":
     num = argv[1]
@@ -27,7 +27,7 @@ if __name__ == "__main__":
             (i['completed']),
             i['title']
         ]
-        
+
         task.append(_str)
     with open(f"{num}.csv", 'w', newline='') as file:
         data = csv.writer(file, delimiter=',', quoting=csv.QUOTE_ALL)
